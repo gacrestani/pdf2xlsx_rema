@@ -10,13 +10,9 @@ Gera vários arquivos .xlsx a partir de um laudo .pdf
 import tabula
 import os
 import datetime
-import pandas
 
-#---------------------------------------------------------------------
-
-print("Este programa cria arquivos .xlsx de tabelas de um arquivo .pdf!")
-print("Início:")
-print(datetime.datetime.now())
+print("Este programa cria arquivos .xlsx das tabelas de um arquivo .pdf!")
+print("Início:", datetime.datetime.now())
 
 titulo_relatorio = input("Insira o titulo do laudo: ")
 diretorio = input(r"Insira o diretório onde está o laudo. Uma nova pasta será criada. Exemplo 'C:\Users\usuariorema\Documents\laudo1': ")
@@ -33,17 +29,13 @@ while True:
         lista_de_paginas.remove(retirar_int)
         print(lista_de_paginas)
     except ValueError:
+        print("Mais nenhuma página para se retirar da análise.")
         break
 
-print ('\n')
-print("As seguintes páginas serão analisadas:")
-print(lista_de_paginas)
-print ('\n')
+print ('As seguintes páginas serão analisadas: \n')
+print(lista_de_paginas, '\n')
 
-print("Criando o diretório...")
-
-
-    
+print("Criando o diretório...")   
 novo_diretorio = diretorio + '\\' + titulo_relatorio
 print("Diretorio: %s \n" %(novo_diretorio))
 os.makedirs(novo_diretorio, exist_ok = True)
@@ -67,5 +59,4 @@ for page, dataframe in dicionario_dataframes.items():
         export_excel = dataframe.to_excel (r'%s\%s\%s_%s.xlsx' %(diretorio,titulo_relatorio,titulo_relatorio,page), index = None, header = True)
         print("Planilha %s_%s.xlsx criada." % (titulo_relatorio,page))
     
-print("\nFinal:")
-print(datetime.datetime.now())
+print("\nFinal: ", datetime.datetime.now())
